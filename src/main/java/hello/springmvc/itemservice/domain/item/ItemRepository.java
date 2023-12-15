@@ -11,7 +11,7 @@ import java.util.Map;
 public class ItemRepository {
 
     // static 선언!!
-    private static final Map<Long, Item> store = new HashMap<>(); // 실무에선느 hashmap 사용하면 안 됨 -> 사용하려면 concurrent hashmap 사용해야 함
+    private static final Map<Long, Item> store = new HashMap<>(); // 실무에서는 hashmap 사용하면 안 됨 -> 사용하려면 concurrent hashmap 사용해야 함
     private static long sequence = 0L; // 실무에는 long 사용하면 안 됨 -> atomic long 등 동시성 꼬이지 않는 것 사용해야 함
 
     public Item save(Item item) {
