@@ -1,5 +1,6 @@
 # Spring MVC - 기본 기능
 * [[인프런] 스프링 MVC 1편 - 섹션7. 스프링 MVC 웹 페이지 만들기](https://www.inflearn.com/course/lecture?courseSlug=%EC%8A%A4%ED%94%84%EB%A7%81-mvc-1&unitId=71207&tab=curriculum)
+* 2023.12.15~18 실습 및 정리
 
 ### 프로젝트 생성
 - Gradle Project
