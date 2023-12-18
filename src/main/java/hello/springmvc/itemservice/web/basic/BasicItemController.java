@@ -81,6 +81,7 @@ public class BasicItemController {
         return "basic/item";
     }
 
+    // 상품 수정 폼
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
@@ -89,11 +90,17 @@ public class BasicItemController {
         return "basic/editForm";
     }
 
+    /**
+     * 상품 수정 처리
+     * HTML Form은 GET POST만 지원 (PUT, PATCH X)
+     * PUT, PATCH는 HTTP API 전송 시에 사용
+     * 스프링에서 HTTP POST로 폼 요청 시 히든 필드로 PUT, PATCH 매핑을 사용할 수는 있지만 HTTP 요청 상 POST 요청이다.
+      */
     @PostMapping("/{itemId}/edit")
     public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
         itemRepository.update(itemId, item);
 
-        return "redirect:/basic/items/{itemId}";
+        return "redirect:/basic/items/{itemId}"; // 상품 상세 화면으로 이동하도록 리다이렉트 호출
     }
 
 
