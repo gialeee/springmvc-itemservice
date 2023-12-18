@@ -89,6 +89,15 @@ public class BasicItemController {
         return "basic/item";
     }
 
+    /**
+     * PRG - Post/Redirect/Get
+     */
+    @PostMapping("/add")
+    public String addItemV5(Item item) {
+        itemRepository.save(item);
+        return "redirect:/basic/items/" + item.getId(); // URL에 변수를 직접 더하는 것은 인코딩이 깨질 수 있어 위험함 -> 지양
+    }
+
     // 상품 수정 폼
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
