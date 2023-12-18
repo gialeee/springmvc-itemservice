@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class BasicItemController {
      * @ModelAttribute 자체 생략 가능
      * model.addAttribute(item) 자동 추가
      */
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItemV4(Item item) {
         itemRepository.save(item);
         return "basic/item";
@@ -92,10 +93,22 @@ public class BasicItemController {
     /**
      * PRG - Post/Redirect/Get
      */
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItemV5(Item item) {
         itemRepository.save(item);
         return "redirect:/basic/items/" + item.getId(); // URL에 변수를 직접 더하는 것은 인코딩이 깨질 수 있어 위험함 -> 지양
+    }
+
+    /**
+     * Redirect Attributes
+     * URL 인코딩, PathVariable 바인딩, 쿼리 파라미터 처리 다 알아서 처리해줌
+     */
+    @PostMapping("/add")
+    public String addItemV6(Item item, RedirectAttributes redirectAttributes) {
+        Item savedItem = itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true); // status=true면 저장 완료 알림 띄우기
+        return "redirect:/basic/items/{itemId}"; // redirect 결과: http://localhost:8080/basic/items/3?status=true
     }
 
     // 상품 수정 폼
